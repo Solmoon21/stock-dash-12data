@@ -1,0 +1,29 @@
+@use "../mixins" as *;
+
+@include block("sma-input") {
+  background: var(--surface-soft);
+  border: 1px solid var(--surface-border);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  backdrop-filter: blur(12px);
+  box-shadow: var(--surface-shadow-soft);
+
+  @include element("label") {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--text-muted);
+  }
+
+@include element("field") {
+    background: var(--surface-strong);
+    border: 1px solid var(--surface-border-strong);
+    border-radius: 12px;
+    padding: 10px 12px;
+    color: var(--text-primary);
+    font-size: 15px;
+  }
+}

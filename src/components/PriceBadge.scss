@@ -1,0 +1,43 @@
+@use "../mixins" as *;
+
+@include block("price-badge") {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 22px;
+  background: var(--surface-soft);
+  border-radius: 18px;
+  border: 1px solid var(--surface-border);
+  backdrop-filter: blur(16px);
+  min-width: 240px;
+
+  @include element("label") {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  @include element("value") {
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  @include element("change") {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--badge-bg);
+
+    @include modifier("up") {
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    @include modifier("down") {
+      color: var(--warn);
+      background: var(--warn-soft);
+    }
+  }
+}

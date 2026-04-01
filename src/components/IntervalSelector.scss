@@ -1,0 +1,53 @@
+@use "../mixins" as *;
+
+@include block("interval-selector") {
+  background: var(--surface-soft);
+  border: 1px solid var(--surface-border);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  backdrop-filter: blur(12px);
+  box-shadow: var(--surface-shadow-soft);
+
+  @include element("label") {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--text-muted);
+  }
+
+  @include element("segments") {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  @include element("segment") {
+    padding: 10px 8px;
+    border-radius: 10px;
+    border: 1px solid var(--surface-border-strong);
+    background: var(--surface-strong);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: translateY(-1px);
+    }
+
+    @include modifier("active") {
+      background: var(--accent-soft);
+      border-color: var(--accent-border);
+      color: var(--accent-contrast);
+      box-shadow: 0 2px 5px rgba(84, 170, 255, 0.2);
+    }
+  }
+}
+
+@media (max-width: 960px) {
+  .interval-selector__segments {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
