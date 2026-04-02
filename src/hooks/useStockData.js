@@ -13,7 +13,7 @@ const useDebouncedValue = (value, delayMs) => {
 };
 
 const toAscending = (values = []) => {
-  return values.reverse();
+  return values.slice().reverse();
 };
 
 const normalizeTimeSeries = (values = []) => {
@@ -30,7 +30,7 @@ const normalizeSmaSeries = (values = []) => {
   }));
 };
 
-export const useStockData = ({ symbol, interval, smaPeriod }) => {
+export const useStockData = ({ symbol, interval, smaPeriod, outputsize = 100 }) => {
   const debouncedInterval = useDebouncedValue(interval, 500);
   const debouncedSmaPeriod = useDebouncedValue(smaPeriod, 500);
 
@@ -39,7 +39,7 @@ export const useStockData = ({ symbol, interval, smaPeriod }) => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (!symbol) return;
+    if (!symbol || !debouncedInterval || !debouncedSmaPeriod) return;
 
     const controller = new AbortController();
 
@@ -53,6 +53,7 @@ export const useStockData = ({ symbol, interval, smaPeriod }) => {
             {
               symbol,
               interval: debouncedInterval,
+              outputsize,
             },
             controller.signal
           ),
@@ -61,6 +62,7 @@ export const useStockData = ({ symbol, interval, smaPeriod }) => {
               symbol,
               interval: debouncedInterval,
               time_period: debouncedSmaPeriod,
+              outputsize,
             },
             controller.signal
           ),
@@ -90,7 +92,7 @@ export const useStockData = ({ symbol, interval, smaPeriod }) => {
     load();
 
     return () => controller.abort();
-  }, [symbol, debouncedInterval, debouncedSmaPeriod]);
+  }, [symbol, debouncedInterval, debouncedSmaPeriod, outputsize]);
 
   const meta = useMemo(() => {
     if (!data.length) return null;

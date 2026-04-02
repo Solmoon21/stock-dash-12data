@@ -1,19 +1,13 @@
-import { API_KEY } from "./consts";
-import { buildUrl, resolveResponse } from "./utils";
+import { buildApiUrl, resolveApiResponse } from "../../lib/api-helper";
 
-export const fetchTimeSeries = (params, signal) => {
-  const url = buildUrl("/time_series", {
-    apikey: API_KEY,
-    outputsize: 120,
-    ...params,
-  });
-  return resolveResponse(url, signal);
+export const fetchTimeSeries = async (params, signal) => {
+  const url = buildApiUrl("/api/time-series", params);
+  const resp = await fetch(url, { signal });
+  return resolveApiResponse(resp);
 };
 
-export const fetchSMA = (params, signal) => {
-  const url = buildUrl("/sma", {
-    apikey: API_KEY,
-    ...params,
-  });
-  return resolveResponse(url, signal);
+export const fetchSMA = async (params, signal) => {
+  const url = buildApiUrl("/api/sma", params);
+  const resp = await fetch(url, { signal });
+  return resolveApiResponse(resp);
 };
