@@ -18,10 +18,7 @@ const PriceChart = ({ data }) => {
       </div>
       <div className="chart-body">
         <ResponsiveContainer width="100%" height={360}>
-          <LineChart
-            data={data}
-            margin={{ top: 10, right: 24, left: 0, bottom: 0 }}
-          >
+          <LineChart data={data} margin={{ top: 10, right: 24, left: 0, bottom: 0 }}>
             <CartesianGrid strokeDasharray="4 4" stroke="var(--chart-grid)" />
             <XAxis
               dataKey="datetime"
@@ -51,13 +48,7 @@ const PriceChart = ({ data }) => {
               strokeWidth={2}
               dot={false}
             />
-            <Line
-              type="monotone"
-              dataKey="sma"
-              stroke="#d48b1f"
-              strokeWidth={2}
-              dot={false}
-            />
+            <Line type="monotone" dataKey="sma" stroke="#d48b1f" strokeWidth={2} dot={false} />
           </LineChart>
         </ResponsiveContainer>
       </div>

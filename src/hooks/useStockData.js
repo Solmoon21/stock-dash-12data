@@ -54,7 +54,7 @@ export const useStockData = ({ symbol, interval, smaPeriod }) => {
               symbol,
               interval: debouncedInterval,
             },
-            controller.signal,
+            controller.signal
           ),
           fetchSMA(
             {
@@ -62,16 +62,14 @@ export const useStockData = ({ symbol, interval, smaPeriod }) => {
               interval: debouncedInterval,
               time_period: debouncedSmaPeriod,
             },
-            controller.signal,
+            controller.signal
           ),
         ]);
 
         const priceSeries = toAscending(normalizeTimeSeries(priceRes?.values));
         const smaSeries = toAscending(normalizeSmaSeries(smaRes?.values));
 
-        const smaByDatetime = new Map(
-          smaSeries.map((item) => [item.datetime, item.sma]),
-        );
+        const smaByDatetime = new Map(smaSeries.map((item) => [item.datetime, item.sma]));
 
         const merged = priceSeries.map((item) => ({
           datetime: item.datetime,
